@@ -1,698 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fae Light Photography — Steve mTerrell</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAE Light Photo - Steve Terrell Photography Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    :root {
-      --white:   #FFFFFF;
-      --fog:     #F0EFED;
-      --stone:   #C8B89A;
-      --ink:     #1A1A1A;
-      --mid:     #6B6560;
-      --display: 'Cormorant Garamond', Georgia, serif;
-      --body:    'Inter', system-ui, sans-serif;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
 
-    html { scroll-behavior: smooth; }
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
 
-    body {
-      background: var(--white);
-      color: var(--ink);
-      font-family: var(--body);
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-    }
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 2.5rem;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
-    }
-    nav.scrolled { border-color: var(--fog); }
+        header p {
+            font-size: 1.2em;
+            color: #bbb;
+        }
 
-    .nav-logo {
-      font-family: var(--display);
-      font-size: 1.15rem;
-      font-weight: 300;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--stone); }
+        nav {
+            background: #1a1a1a;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 2.25rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--ink); }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
 
-    /* ── HERO ── */
-    .hero {
-      height: 100svh;
-      min-height: 600px;
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      overflow: hidden;
-      background: var(--ink);
-    }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
 
-    .hero-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.82;
-      transition: transform 8s ease-out;
-    }
-    .hero:hover .hero-img { transform: scale(1.03); }
+        nav a:hover {
+            color: #ffb347;
+        }
 
-    /* Placeholder gradient when no real image is set */
-    .hero-placeholder {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(160deg, #2a2520 0%, #1a1a1a 40%, #3d2f1f 100%);
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 2.5rem 4rem;
-      max-width: 760px;
-    }
+        section {
+            padding: 60px 20px;
+        }
 
-    .hero-eyebrow {
-      font-family: var(--body);
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--stone);
-      margin-bottom: 1rem;
-    }
+        section h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #1a1a1a;
+        }
 
-    .hero-title {
-      font-family: var(--display);
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 300;
-      line-height: 1.05;
-      color: var(--white);
-      margin-bottom: 1.5rem;
-    }
-    .hero-title em {
-      font-style: italic;
-      color: var(--stone);
-    }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
 
-    .hero-sub {
-      font-size: 0.88rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.65);
-      max-width: 420px;
-      margin-bottom: 2.25rem;
-    }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            aspect-ratio: 1;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .hero-cta {
-      display: inline-block;
-      padding: 0.75rem 2rem;
-      border: 1px solid var(--stone);
-      color: var(--stone);
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.25s, color 0.25s;
-    }
-    .hero-cta:hover {
-      background: var(--stone);
-      color: var(--white);
-    }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 2rem;
-      right: 2.5rem;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-    }
-    .hero-scroll::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
-      animation: scrollLine 2s ease-in-out infinite;
-    }
-    @keyframes scrollLine {
-      0%, 100% { opacity: 0.4; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(0.6); }
-    }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
 
-    /* ── INTRO STRIP ── */
-    .intro {
-      background: var(--white);
-      padding: 5rem 2.5rem;
-      display: flex;
-      justify-content: center;
-    }
-    .intro-inner {
-      max-width: 680px;
-      text-align: center;
-    }
-    .section-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--stone);
-      margin-bottom: 1.25rem;
-    }
-    .intro-text {
-      font-family: var(--display);
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.55;
-      color: var(--ink);
-    }
+        #about {
+            background: #f9f9f9;
+        }
 
-    /* ── COLLECTIONS ── */
-    .collections {
-      background: var(--fog);
-      padding: 5rem 2.5rem;
-    }
-    .collections-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-    .collections-title {
-      font-family: var(--display);
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 300;
-      color: var(--ink);
-    }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
 
-    .collections-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+        .about-content p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
 
-    .collection-card {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      cursor: pointer;
-      background: var(--ink);
-      text-decoration: none;
-      display: block;
-    }
+        #contact {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+        }
 
-    /* Signature element: collection name in massive thin letterforms behind the image */
-    .collection-card::before {
-      content: attr(data-name);
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--display);
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 300;
-      font-style: italic;
-      letter-spacing: 0.04em;
-      color: var(--white);
-      opacity: 0;
-      z-index: 2;
-      text-align: center;
-      padding: 1rem;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-    .collection-card:hover::before { opacity: 1; }
+        #contact h2 {
+            color: white;
+        }
 
-    .collection-bg {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.6s ease, opacity 0.4s ease;
-    }
-    .collection-card:hover .collection-bg {
-      transform: scale(1.05);
-      opacity: 0.55;
-    }
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-    /* Unique placeholder gradients per collection */
-    .col-golden  { background: linear-gradient(135deg, #c4933f 0%, #f0c97a 50%, #7a4f1a 100%); }
-    .col-ground  { background: linear-gradient(160deg, #2d3a2e 0%, #4a5c3a 50%, #1a2018 100%); }
-    .col-desolate{ background: linear-gradient(135deg, #8c8480 0%, #d4cfc9 50%, #4a443f 100%); }
-    .col-wings   { background: linear-gradient(135deg, #1a3a5c 0%, #4a7a9c 50%, #0d2035 100%); }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
 
-    /* Real image support */
-    .collection-bg img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+        .contact-links a {
+            background: #ffb347;
+            color: #1a1a1a;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
 
-    .collection-info {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      z-index: 3;
-      padding: 1.5rem;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
-      transform: translateY(4px);
-      transition: transform 0.3s ease;
-    }
-    .collection-card:hover .collection-info { transform: translateY(0); }
+        .contact-links a:hover {
+            background: #ffa500;
+        }
 
-    .collection-name {
-      font-family: var(--display);
-      font-size: 1.3rem;
-      font-weight: 300;
-      color: var(--white);
-      letter-spacing: 0.03em;
-    }
-    .collection-count {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--stone);
-      margin-top: 0.25rem;
-    }
+        footer {
+            background: #1a1a1a;
+            color: #999;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
 
-    /* ── ABOUT ── */
-    .about {
-      background: var(--white);
-      padding: 5rem 2.5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      align-items: center;
-    }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
 
-    .about-portrait {
-      aspect-ratio: 3/4;
-      background: var(--fog);
-      position: relative;
-      overflow: hidden;
-    }
-    .about-portrait::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(160deg, #2a2520 0%, #3d2f1f 100%);
-      opacity: 0.6;
-    }
-    .about-portrait-label {
-      position: absolute;
-      bottom: 1.5rem;
-      left: 1.5rem;
-      z-index: 2;
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-    }
+            section h2 {
+                font-size: 1.8em;
+            }
 
-    .about-text .section-label { text-align: left; }
-
-    .about-heading {
-      font-family: var(--display);
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 300;
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-      color: var(--ink);
-    }
-    .about-heading em {
-      font-style: italic;
-      color: var(--stone);
-    }
-
-    .about-body {
-      font-size: 0.88rem;
-      line-height: 1.85;
-      color: var(--mid);
-      margin-bottom: 2rem;
-    }
-
-    .about-links {
-      display: flex;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      display: inline-block;
-      padding: 0.7rem 1.75rem;
-      background: var(--ink);
-      color: var(--white);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background 0.25s;
-    }
-    .btn-primary:hover { background: var(--stone); }
-
-    .btn-outline {
-      display: inline-block;
-      padding: 0.7rem 1.75rem;
-      border: 1px solid var(--ink);
-      color: var(--ink);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: border-color 0.25s, color 0.25s;
-    }
-    .btn-outline:hover { border-color: var(--stone); color: var(--stone); }
-
-    /* ── CAMPAIGN STRIP ── */
-    .campaign {
-      background: var(--ink);
-      padding: 4rem 2.5rem;
-      text-align: center;
-    }
-    .campaign .section-label { color: var(--stone); margin-bottom: 1rem; }
-    .campaign-title {
-      font-family: var(--display);
-      font-size: clamp(1.6rem, 4vw, 2.8rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--white);
-      margin-bottom: 1rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .campaign-body {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.75;
-      max-width: 480px;
-      margin: 0 auto 2rem;
-    }
-    .btn-campaign {
-      display: inline-block;
-      padding: 0.85rem 2.5rem;
-      background: var(--stone);
-      color: var(--white);
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .btn-campaign:hover { opacity: 0.85; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--fog);
-      padding: 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .footer-logo {
-      font-family: var(--display);
-      font-size: 1rem;
-      font-weight: 300;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ink);
-    }
-    .footer-logo span { color: var(--stone); }
-    .footer-copy {
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--mid);
-    }
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-    .footer-links a {
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--ink); }
-
-    /* ── HAMBURGER ── */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .nav-toggle span {
-      display: block;
-      width: 22px;
-      height: 1px;
-      background: var(--ink);
-      transition: transform 0.3s, opacity 0.3s;
-    }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { opacity: 0; }
-    .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.25rem; }
-      .nav-toggle { display: flex; }
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 56px; left: 0; right: 0;
-        background: rgba(255,255,255,0.97);
-        backdrop-filter: blur(8px);
-        flex-direction: column;
-        gap: 0;
-        padding: 1rem 0;
-        border-bottom: 1px solid var(--fog);
-        z-index: 99;
-      }
-      .nav-links.open { display: flex; }
-      .nav-links li a {
-        display: block;
-        padding: 0.85rem 1.5rem;
-        font-size: 0.78rem;
-      }
-      .hero-content { padding: 0 1.25rem 3rem; }
-      .intro, .collections { padding: 3.5rem 1.25rem; }
-      .collections-grid { grid-template-columns: 1fr; }
-      .about {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        padding: 3.5rem 1.25rem;
-      }
-      .about-portrait { display: none; }
-      .campaign { padding: 3.5rem 1.25rem; }
-      footer { flex-direction: column; text-align: center; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-img, .collection-bg, * { transition: none !important; animation: none !important; }
-    }
-  </style>
+            nav ul {
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>FAE LIGHT PHOTO</h1>
+        <p>By Steve Terrell | Capturing Light, Preserving Moments</p>
+    </header>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <a href="#" class="nav-logo">Fae <span>Light</span></a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#collections">Collections</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="mailto:sterrell.mn1991@gmail.com?subject=Print%20Inquiry%20%E2%80%94%20Fae%20Light%20Photography">Commission a Print</a></li>
-      <li><a href="#campaign">Support</a></li>
-    </ul>
-  </nav>
+    <nav>
+        <ul>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <img class="hero-img" src="images/grass_sunrays.jpg" alt="Sun rays bursting through tall grass — Fae Light Photography" />
-    <div class="hero-scroll" aria-hidden="true">Scroll</div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Minneapolis · Nature &amp; Wildlife Photography</p>
-      <h1 class="hero-title">The world<br/>at <em>ground level</em></h1>
-      <p class="hero-sub">Finding the extraordinary in the overlooked. Four collections. One perspective. Shot from where most photographers never kneel.</p>
-      <a href="#collections" class="hero-cta">Explore the work</a>
-    </div>
-  </section>
-
-  <!-- INTRO -->
-  <section class="intro">
-    <div class="intro-inner">
-      <p class="section-label">The Vision</p>
-      <p class="intro-text">"A voice for people whose gifts the world never saw — and a lens for the beauty it walks past every day."</p>
-    </div>
-  </section>
-
-  <!-- COLLECTIONS -->
-  <section class="collections" id="collections">
-    <div class="collections-header">
-      <p class="section-label">Portfolio</p>
-      <h2 class="collections-title">Four Collections</h2>
-    </div>
-    <div class="collections-grid">
-
-      <a class="collection-card" data-name="Golden Hour" href="mailto:sterrell.mn1991@gmail.com?subject=Print%20Inquiry%20%E2%80%94%20Golden%20Hour%20Collection">
-        <div class="collection-bg col-golden">
-          <img src="images/pine_trees_sunset.jpg" alt="Golden Hour — pine trees at sunset" />
+    <section id="gallery" class="container">
+        <h2>Gallery</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="eagle_flight.jpg" alt="Eagle in Flight">
+            </div>
+            <div class="gallery-item">
+                <img src="flag_sunset.jpg" alt="Flag at Sunset">
+            </div>
+            <div class="gallery-item">
+                <img src="grass_sunrays.jpg" alt="Grass with Sunrays">
+            </div>
+            <div class="gallery-item">
+                <img src="gull_canopy.jpg" alt="Gull Under Canopy">
+            </div>
+            <div class="gallery-item">
+                <img src="mullein_lake.jpg" alt="Mullein by Lake">
+            </div>
+            <div class="gallery-item">
+                <img src="osprey_fish.jpg" alt="Osprey with Fish">
+            </div>
+            <div class="gallery-item">
+                <img src="pelican_flight.jpg" alt="Pelican in Flight">
+            </div>
+            <div class="gallery-item">
+                <img src="pine_trees_sunset.jpg" alt="Pine Trees at Sunset">
+            </div>
+            <div class="gallery-item">
+                <img src="pinecone_top.jpg" alt="Pinecone from Above">
+            </div>
+            <div class="gallery-item">
+                <img src="pinecones_sunset.jpg" alt="Pinecones at Sunset">
+            </div>
+            <div class="gallery-item">
+                <img src="purple_asters.jpg" alt="Purple Asters">
+            </div>
+            <div class="gallery-item">
+                <img src="purple_flower_cone.jpg" alt="Purple Flower Cone">
+            </div>
+            <div class="gallery-item">
+                <img src="sunset_street.jpg" alt="Sunset on Street">
+            </div>
         </div>
-        <div class="collection-info">
-          <p class="collection-name">Golden Hour</p>
-          <p class="collection-count">Inquire about prints</p>
+    </section>
+
+    <section id="about" class="container">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <p>I'm Steve Terrell, and I'm deeply passionate about photography and what it does for the soul. Finding beauty in the most desolate of places has been a coping mechanism I've utilized for a good chunk of my life. It helps keep me grounded.</p>
+            <p>Through my lens, I seek to reveal the extraordinary hidden within the ordinary—the resilience of nature, the interplay of light and shadow, and moments of quiet grace. My work focuses on wildlife and landscape photography, capturing scenes that speak to the healing power of connection with the natural world.</p>
+            <p>Photography isn't just about creating beautiful images; it's about transformation. It's about seeing the world differently and sharing that perspective with others. Every frame is an invitation to pause, breathe, and find solace in the beauty that surrounds us.</p>
         </div>
-      </a>
+    </section>
 
-      <a class="collection-card" data-name="Ground Level" href="mailto:sterrell.mn1991@gmail.com?subject=Print%20Inquiry%20%E2%80%94%20Ground%20Level%20Collection">
-        <div class="collection-bg col-ground">
-          <img src="images/grass_lake_dusk.jpg" alt="Ground Level — grass stalks at blue hour" />
+    <section id="contact" class="container">
+        <h2>Get In Touch</h2>
+        <div class="contact-content">
+            <p>Interested in working together or want to talk about photography? I'd love to hear from you!</p>
+            <div class="contact-links">
+                <a href="mailto:sterrell.mn1991@gmail.com">Email Me</a>
+            </div>
         </div>
-        <div class="collection-info">
-          <p class="collection-name">Ground Level</p>
-          <p class="collection-count">Inquire about prints</p>
-        </div>
-      </a>
+    </section>
 
-      <a class="collection-card" data-name="Desolate Beauty" href="mailto:sterrell.mn1991@gmail.com?subject=Print%20Inquiry%20%E2%80%94%20Desolate%20Beauty%20Collection">
-        <div class="collection-bg col-desolate">
-          <img src="images/pinecones_sunset.jpg" alt="Desolate Beauty — pine cones at sunset" />
-        </div>
-        <div class="collection-info">
-          <p class="collection-name">Desolate Beauty</p>
-          <p class="collection-count">Inquire about prints</p>
-        </div>
-      </a>
-
-      <a class="collection-card" data-name="Wings &amp; Wild Things" href="mailto:sterrell.mn1991@gmail.com?subject=Print%20Inquiry%20%E2%80%94%20Wings%20%26%20Wild%20Things%20Collection">
-        <div class="collection-bg col-wings">
-          <img src="images/gull_canopy.jpg" alt="Wings and Wild Things — gull through tree canopy" />
-        </div>
-        <div class="collection-info">
-          <p class="collection-name">Wings &amp; Wild Things</p>
-          <p class="collection-count">Inquire about prints</p>
-        </div>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about">
-      <div class="about-portrait">
-        <!-- Replace with: <img src="YOUR_PORTRAIT" alt="Steve Terrell" style="width:100%;height:100%;object-fit:cover;" /> -->
-        <p class="about-portrait-label">Steve Terrell · Fae Light</p>
-      </div>
-      <div class="about-text">
-        <p class="section-label">The Photographer</p>
-        <h2 class="about-heading">Raw light.<br/><em>Real ground.</em></h2>
-        <p class="about-body">I'm Steve Terrell — a writer, musician, and photographer based in Minneapolis. I shoot low and slow, from the ground up, because that's where the truth lives. Fae Light is how I share that truth: nature and wildlife caught in the moments before you'd look away.</p>
-        <p class="about-body">Every print is a reminder that the extraordinary was always right there — you just had to be willing to kneel.</p>
-        <div class="about-links">
-          <a href="mailto:sterrell.mn1991@gmail.com?subject=Print%20Inquiry%20%E2%80%94%20Fae%20Light%20Photography" class="btn-primary">Commission a Print</a>
-          <a href="mailto:sterrell.mn1991@gmail.com" class="btn-outline">Get in Touch</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CAMPAIGN STRIP -->
-  <section class="campaign" id="campaign">
-    <p class="section-label">Now Funding</p>
-    <h2 class="campaign-title">Halfway There — a TV pilot</h2>
-    <p class="campaign-body">A single-camera comedy set at Serenity Pines Transitional Living. Raw, honest, and built by one person with something to say. Help bring it to life.</p>
-    <a href="https://gofund.me/957c11590" target="_blank" class="btn-campaign">Support on GoFundMe</a>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p class="footer-logo">Fae <span>Light</span></p>
-    <ul class="footer-links">
-      <li><a href="#collections">Collections</a></li>
-      <li><a href="mailto:sterrell.mn1991@gmail.com?subject=Print%20Inquiry%20%E2%80%94%20Fae%20Light%20Photography">Commission a Print</a></li>
-      <li><a href="mailto:sterrell.mn1991@gmail.com">Contact</a></li>
-    </ul>
-    <p class="footer-copy">&copy; 2026 Steve Terrell · Fae Light Photography</p>
-  </footer>
-
-  <script>
-    // Nav border on scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
-
-    // Hamburger toggle
-    const toggle = document.getElementById('nav-toggle');
-    const links = document.getElementById('nav-links');
-    toggle.addEventListener('click', () => {
-      toggle.classList.toggle('open');
-      links.classList.toggle('open');
-    });
-    // Close menu when a link is clicked
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        toggle.classList.remove('open');
-        links.classList.remove('open');
-      });
-    });
-  </script>
-
+    <footer>
+        <p>&copy; 2024 FAE Light Photo | Steve Terrell. All rights reserved.</p>
+    </footer>
 </body>
 </html>
